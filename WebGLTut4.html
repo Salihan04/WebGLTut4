@@ -161,11 +161,22 @@
 			//Left face
 			0.0, 1.0, 0.0,
 			-1.0, -1.0, -1.0,
-			-1.0, -1.0, 1.0
+			-1.0, -1.0, 1.0,
+			
+			//Bottom face is square which can be split into 2 triangles
+			//1st triangle
+			-1.0, -1.0, -1.0,
+			1.0, -1.0, -1.0,
+			-1.0, -1.0, 1.0,
+
+			//2nd triangle
+			-1.0, -1.0, 1.0,
+			1.0, -1.0, 1.0,
+			1.0, -1.0, -1.0
 		];
 		gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(vertices), gl.STATIC_DRAW);
 		pyramidVertexPositionBuffer.itemSize = 3;
-		pyramidVertexPositionBuffer.numItems = 12;
+		pyramidVertexPositionBuffer.numItems = 18;
 
 		//initialise pyramid color buffer
 		pyramidVertexColorBuffer = gl.createBuffer();
@@ -186,11 +197,22 @@
 			//Left face
 			1.0, 0.0, 0.0, 1.0,
 			0.0, 1.0, 0.0, 1.0,
-			0.0, 0.0, 1.0, 1.0
+			0.0, 0.0, 1.0, 1.0,
+			
+			//Bottom face is square which can be split into 2 triangles
+			//1st triangle
+			1.0, 0.0, 0.0, 1.0,
+			0.0, 1.0, 0.0, 1.0,
+			0.0, 0.0, 1.0, 1.0,
+
+			//2nd triangle
+			0.0, 0.0, 1.0, 1.0,
+			1.0, 0.0, 0.0, 1.0,
+			0.0, 1.0, 0.0, 1.0
 		];
 		gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(colors), gl.STATIC_DRAW);
 		pyramidVertexColorBuffer.itemSize = 4;
-		pyramidVertexColorBuffer.numItems = 12;
+		pyramidVertexColorBuffer.numItems = 18;
 
 		//initialise cube vertex buffer
 		cubeVertexPositionBuffer = gl.createBuffer();
@@ -280,7 +302,7 @@
 		mat4.translate(mvMatrix, [-1.5, 0.0, -7.0]);
 
 		mvPushMatrix();
-		mat4.rotate(mvMatrix, degToRad(rPyramid), [0, 1, 0]);					//rotate about y-axis		
+		mat4.rotate(mvMatrix, degToRad(rPyramid), [1, 1, 0]);					//rotate about y-axis		
 
 		gl.bindBuffer(gl.ARRAY_BUFFER, pyramidVertexPositionBuffer);
 		gl.vertexAttribPointer(shaderProgram.vertexPositionAttribute, pyramidVertexPositionBuffer.itemSize, gl.FLOAT, false, 0, 0);
